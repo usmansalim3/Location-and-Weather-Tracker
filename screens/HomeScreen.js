@@ -2,24 +2,19 @@ import { Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-nativ
 import React from 'react'
 import { NavigationContainer, useNavigation } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Location from './Location'
-import News from './News'
-import Weather from './Weather'
-import { Entypo } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
-import COLORS from '../constants/colors'
+
+import COLORS from "../constants/colors"
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Home from './News'
-import NewsSearch from './NewsSearch'
-import HomePage from './HomePage'
-import SavedPosts from './SavedPosts'
-import { Feather } from '@expo/vector-icons'; 
+
+import NewsSearch from './NewsScreens/NewsSearch'
+import HomePage from "../components/HomePage"
+import SavedPosts from '../screens/NewsScreens/SavedPosts'
+
 import { useSelector } from 'react-redux'
-import { Ionicons } from '@expo/vector-icons'; 
-import SavedLocations from './SavedLocations'
-import UpdateInfo from './UpdateInfo'
-import { LinearGradient } from 'expo-linear-gradient'
+
+import SavedLocations from '../screens/LocationScreens/SavedLocations'
+import UpdateInfo from './AuthScreens/UpdateInfo'
+
 import { IconButton } from 'react-native-paper'
 
 
@@ -46,7 +41,8 @@ const HomeScreen = () => {
     <stack.Navigator screenOptions={{
       headerShown:false,
       headerStyle:{backgroundColor:COLORS.light},
-      headerTintColor:COLORS.blue
+      headerTintColor:COLORS.blue,
+      gestureEnabled:false
     }}>
       <stack.Screen component={HomePage} name="Home Page" options={{
         gestureEnabled:false,

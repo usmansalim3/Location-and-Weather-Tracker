@@ -4,7 +4,7 @@ import COLORS from '../constants/colors'
 import { MaterialIcons } from '@expo/vector-icons'; 
 
 
-const Input = ({label,iconName,hide,placeholder,value,handleChange,error,touched,formik,type}) => {
+const Input = ({label,iconName,hide,placeholder,value,handleChange,error,touched,formik,type,errorVisible}) => {
     const [show,setShow]=useState(hide);
     const warning=!!error[label];
     return (

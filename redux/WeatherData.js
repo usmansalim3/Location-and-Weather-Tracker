@@ -6,7 +6,7 @@ export const initialState={
     weatherData:null,
     success:false,
     loading:true,
-    error:''
+    error:false
 }
 
 export const getWeatherData=createAsyncThunk('weather/getWeatherData',async(args,{rejectWithValue})=>{
@@ -31,7 +31,7 @@ export const getWeatherData=createAsyncThunk('weather/getWeatherData',async(args
         return {...weatherResponse.data,pollutionData,aqi};
         //return response.data;
     }catch(e){
-        rejectWithValue(e.response.data);
+        return rejectWithValue(e.response.data);
     }
 });
 
@@ -41,18 +41,25 @@ const weatherSlice=createSlice({
     extraReducers:{
         [getWeatherData.pending]:(state,{payload})=>{
             if(!state.success){
+                console.log("success getting")
                 state.loading=true;
             }
+            state.success=false;
+            state.error=false
+            console.log("getting")
         },
         [getWeatherData.fulfilled]:(state,{payload})=>{
             state.weatherData=payload;
             state.loading=false;
             state.success=true;
+            state.error=false;
+            console.log("successfully got data")
         },
         [getWeatherData.rejected]:(state,{payload})=>{
             state.success=false;
             state.loading=false;
-            state.error=payload
+            state.error=true
+            console.log("failed")
         }
     }
 })

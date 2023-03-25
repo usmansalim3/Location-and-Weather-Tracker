@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, ActionSheetIOS } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, ActionSheetIOS, Pressable, Linking } from 'react-native'
 import React, { useContext, useEffect } from 'react'
 import moment from 'moment/moment'
 import { Entypo } from '@expo/vector-icons'; 
@@ -37,6 +37,8 @@ const SavedPostCard= (props) => {
         }}>
             <IconButton icon='cards-heart' iconColor={COLORS.blue} size={25} onPress={pressHandler}/>
         </View>
+        <Pressable onPress={()=>Linking.openURL(props.url)}>
+        <>
         {props.urlToImage?
             <Image source={{uri:props.urlToImage}}
             style={{height:200,width:"100%",borderTopLeftRadius:20,borderTopRightRadius:20}}
@@ -62,6 +64,8 @@ const SavedPostCard= (props) => {
                 </Text>
             </View>
         </View>
+        </>
+        </Pressable>
     </View>
   )
 }

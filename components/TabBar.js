@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Register from '../screens/Register';
-import Login from '../screens/Login';
+import Register from '../screens/AuthScreens/Register';
+import Login from '../screens/AuthScreens/Login';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import COLORS from '../constants/colors';
 import { AntDesign , FontAwesome5} from '@expo/vector-icons';

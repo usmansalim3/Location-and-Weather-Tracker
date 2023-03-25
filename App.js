@@ -2,19 +2,17 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import Input from './components/Input';
 import COLORS from './constants/colors';
-import Login from './screens/Login';
-import Register from './screens/Register';
-import AuthContextProvider from './authContext/AuthContextProvider';
+import AuthContextProvider from '././authContext/AuthContextProvider';
 import HomeScreen from './screens/HomeScreen';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import WeatherData, { getWeatherData } from './redux/WeatherData';
-import UserCred from './screens/UserCred';
+import UserCred from './screens/AuthScreens/UserCred';
 import { ThemeProvider } from 'react-native-paper';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import TabBar from './components/TabBar';
+
 
 
 export default function App() {
@@ -26,9 +24,8 @@ export default function App() {
       <Provider store={storee}>
       <AuthContextProvider>
         <NavigationContainer>
-          <stack.Navigator screenOptions={{headerShown:false}}>
-            {/*<stack.Screen component={Register} name="Register"/>
-            <stack.Screen component={Login} name="Login" />*/}
+          <StatusBar style="dark"  />
+          <stack.Navigator screenOptions={{headerShown:false,gestureEnabled:false}}>
             <stack.Screen component={TabBar} name="start"/>
             <stack.Screen component={UserCred} name="Add Details" options={{
               headerTintColor:COLORS.blue ,

@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, ActionSheetIOS } from 'react-native'
-import React, { useContext, useEffect } from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity, ActionSheetIOS,TouchableWithoutFeedback, Linking, Pressable } from 'react-native'
+import React, { memo, useContext, useEffect } from 'react'
 import moment from 'moment/moment'
 import { Entypo } from '@expo/vector-icons'; 
 import COLORS from '../constants/colors';
@@ -17,6 +17,7 @@ import { IconButton, TouchableRipple } from 'react-native-paper';
 const NewsCard = (props) => {
     const firestore=firebase.firestore().collection('UserSavedPosts')
     const [docID,setdocID]=useState('');
+    
     const dispatch=useDispatch();
     const[touch,setTouch]=useState(props.touch);
     const[exists,setExists]=useState(false)
@@ -32,7 +33,8 @@ const NewsCard = (props) => {
                 author:props.author,
                 publishedAt:props.publishedAt,
                 sourceName:props.sourceName,
-                urlToImage:props.urlToImage
+                urlToImage:props.urlToImage,
+                urlToNews:props.url
             }
             await firestore.add(savedPost).then((query)=>{
                 setdocID(query.id);
@@ -47,10 +49,11 @@ const NewsCard = (props) => {
         }
     }
   return (
+    
     <View style={styles.container}>
         <View style={{
             position:'absolute',
-            zIndex:1,
+            zIndex:11,
             right:12,
             top:0,
             
@@ -59,10 +62,12 @@ const NewsCard = (props) => {
             <IconButton icon='cards-heart-outline' size={25} iconColor={COLORS.blue} onPress={pressHandler}/>}
             {/*touch?<Entypo name="save" size={24} color="black" />:<AntDesign name="save" size={24} color="black" />*/}
         </View>
+        <Pressable onPress={()=>Linking.openURL(props.url)} style={{zIndex:10}}>
+        <>
         {props.urlToImage?
-            <Image source={{uri:props.urlToImage}}
-            style={{height:200,width:"100%",borderTopLeftRadius:20,borderTopRightRadius:20}}
-            />
+                <Image source={{uri:props.urlToImage}}
+                style={{height:200,width:"100%",borderTopLeftRadius:20,borderTopRightRadius:20}}
+                />
             :
         <Svg xmlns="http://www.w3.org/2000/svg" height={200} width='100%' viewBox="0 0 64 64"><Rect width="56" height="40" x="4" y="16" fill="#f6f5f5"/><Rect width="56" height="8" x="4" y="8" fill="#1f3c88"/><Path fill="#070d59" d="M60,7H4A1,1,0,0,0,3,8V56a1,1,0,0,0,1,1H60a1,1,0,0,0,1-1V8A1,1,0,0,0,60,7ZM5,9H59v6H5ZM59,55H5V17H59Z"/><Circle cx="8" cy="12" r="1" fill="#ee6f57"/><Circle cx="12" cy="12" r="1" fill="#ee6f57"/><Circle cx="16" cy="12" r="1" fill="#ee6f57"/><Path fill="#ee6f57" d="M37 26H27a1 1 0 0 0-1 1V45a1 1 0 0 0 1 1H37a1 1 0 0 0 1-1V27A1 1 0 0 0 37 26zM36 44H28V28h8zM51 28a1 1 0 0 0-1 1v8H42V27a1 1 0 0 0-2 0V38a1 1 0 0 0 1 1h9v6a1 1 0 0 0 2 0V29A1 1 0 0 0 51 28zM23 28a1 1 0 0 0-1 1v8H14V27a1 1 0 0 0-2 0V38a1 1 0 0 0 1 1h9v6a1 1 0 0 0 2 0V29A1 1 0 0 0 23 28z"/></Svg>
         }
@@ -84,11 +89,13 @@ const NewsCard = (props) => {
                 </Text>
             </View>
         </View>
+        </>
+        </Pressable>
     </View>
   )
 }
 
-export default NewsCard
+export default memo(NewsCard)
 
 const styles = StyleSheet.create({
     container:{
