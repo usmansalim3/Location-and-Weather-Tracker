@@ -27,6 +27,10 @@ Application that tracks user location, weather and pollution data along with new
 
 Memoizing components to prevent unnecessary re-renders 
 
+## Screenshots
+
+![wt1](https://github.com/usmansalim3/openAI/assets/112751010/d85a6df8-b4cd-4f67-b7fe-c4d8bcc697aa)
+![wt2](https://github.com/usmansalim3/openAI/assets/112751010/adf491d4-2ebe-4f46-b5c3-d3933c252c11)
 
 ## Demo
 
@@ -55,9 +59,5 @@ https://user-images.githubusercontent.com/112751010/227319918-d9424256-bcaf-4294
 
 
 
-## Screenshots
-
-![wt1](https://github.com/usmansalim3/openAI/assets/112751010/d85a6df8-b4cd-4f67-b7fe-c4d8bcc697aa)
-![wt2](https://github.com/usmansalim3/openAI/assets/112751010/adf491d4-2ebe-4f46-b5c3-d3933c252c11)
 
 
