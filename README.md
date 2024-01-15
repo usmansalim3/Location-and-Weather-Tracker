@@ -57,14 +57,7 @@ https://user-images.githubusercontent.com/112751010/227319918-d9424256-bcaf-4294
 
 ## Screenshots
 
-![WhatsApp Image 2023-03-22 at 3 38 51 PM](https://user-images.githubusercontent.com/112751010/227320554-d6738f47-cbaf-4cfd-8288-5e34ccc53e40.jpeg)
-![WhatsApp Image 2023-03-22 at 3 38 43 PM](https://user-images.githubusercontent.com/112751010/227320547-0e5a62d6-5fb9-4b18-8bf0-9cd764a21a8c.jpeg)
-![WhatsApp Image 2023-03-19 at 2 36 51 AM](https://user-images.githubusercontent.com/112751010/226165655-73605f82-31fe-4af1-851f-10f314363dcc.jpeg)
-![WhatsApp Image 2023-03-22 at 3 38 33 PM](https://user-images.githubusercontent.com/112751010/227720362-621e1a9e-222d-4d46-9f3c-858cfdcd733e.jpeg)
-![WhatsApp Image 2023-03-19 at 2 37 00 AM](https://user-images.githubusercontent.com/112751010/226165667-815d33ba-ce6a-4376-940c-b295074b7d2e.jpeg)
-![WhatsApp Image 2023-03-22 at 3 38 01 PM](https://user-images.githubusercontent.com/112751010/227320526-335226c7-2e47-43a4-b990-0bf70859f329.jpeg)
-![WhatsApp Image 2023-03-24 at 12 36 023 AM](https://user-images.githubusercontent.com/112751010/227321941-07dc1a36-e182-47fa-acd4-33b36c6d08f2.jpeg)
-![WhatsApp Image 2023-03-24 at 12 36 02 AM](https://user-images.githubusercontent.com/112751010/227321936-c637c9a2-3e7d-4590-9873-f60ac6e29c55.jpeg)
-![WhatsApp Image 2023-03-22 at 3 52 28 PM](https://user-images.githubusercontent.com/112751010/227320561-0017bda2-bd26-4d57-80c3-3f5d0c308bed.jpeg)
+![wt1](https://github.com/usmansalim3/openAI/assets/112751010/d85a6df8-b4cd-4f67-b7fe-c4d8bcc697aa)
+![wt2](https://github.com/usmansalim3/openAI/assets/112751010/adf491d4-2ebe-4f46-b5c3-d3933c252c11)
 
 
