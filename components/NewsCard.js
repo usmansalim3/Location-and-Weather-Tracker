@@ -12,18 +12,33 @@ import { authContext } from '../authContext/AuthContextProvider';
 import { nanoid } from 'nanoid'
 import Svg, { Circle, Path, Rect, SvgUri } from 'react-native-svg';
 import { IconButton, TouchableRipple } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 
 const NewsCard = (props) => {
     const firestore=firebase.firestore().collection('UserSavedPosts')
     const [docID,setdocID]=useState('');
-    
+    const navigation=useNavigation();
     const dispatch=useDispatch();
     const[touch,setTouch]=useState(props.touch);
     const[exists,setExists]=useState(false)
     const {user}=useContext(authContext);
+    async function check(){
+        const docs=(await firestore.where('id','==',user.uid+props.publishedAt+props.author).onSnapshot((d)=>{
+            if(d.size){
+                setExists(true)
+                console.log("Exists")
+            }else{
+                setExists(false)
+            }
+        }));
+
+    }
+    useEffect(()=>{
+        check()
+    },[])
     async function pressHandler(){
-        if(touch===false){
+        if(exists==false){
             //dispatch(add(props.item));
             const savedPost={
                 id:user.uid+props.publishedAt+props.author,
@@ -39,9 +54,9 @@ const NewsCard = (props) => {
             await firestore.add(savedPost).then((query)=>{
                 setdocID(query.id);
             });
-            setTouch(true)
+            setExists(true);
         }else{
-            setTouch(false);
+            setExists(false);
             await firestore.doc(docID).delete();
             setdocID('');
             //dispatch(remove(props.item.title));
@@ -58,11 +73,11 @@ const NewsCard = (props) => {
             top:0,
             
         }}>
-            {touch?<IconButton icon='cards-heart' size={25} iconColor={COLORS.blue} onPress={pressHandler}/> : 
+            {exists?<IconButton icon='cards-heart' size={25} iconColor={COLORS.blue} onPress={pressHandler}/> : 
             <IconButton icon='cards-heart-outline' size={25} iconColor={COLORS.blue} onPress={pressHandler}/>}
             {/*touch?<Entypo name="save" size={24} color="black" />:<AntDesign name="save" size={24} color="black" />*/}
         </View>
-        <Pressable onPress={()=>Linking.openURL(props.url)} style={{zIndex:10}}>
+        <Pressable onPress={()=>navigation.navigate('NewsWebView',{uri:props.url})} style={{zIndex:10}}>
         <>
         {props.urlToImage?
                 <Image source={{uri:props.urlToImage}}
@@ -76,16 +91,16 @@ const NewsCard = (props) => {
             <Text style={styles.description} numberOfLines={5}>{props.description}</Text>
             <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10}}>
                 <Text style={{fontSize:16}}>
-                    By:<Text style={{fontWeight:'bold',color:'#4361ee'}}>{props.author&&!props.author.includes('/')?props.author:"NA"}</Text>
+                    By:<Text style={{fontFamily:"Barlow-Bold",color:'#4361ee'}}>{props.author&&!props.author.includes('/')?" "+props.author:" NA"}</Text>
                 </Text>
-                <Text style={{fontWeight:'bold',color:'#4361ee',fontSize:16}}>
+                <Text style={{fontFamily:"Barlow-Bold",color:'#4361ee',fontSize:16}}>
                     {moment(props.publishedAt).format("MMM Do YY")}
                 </Text>
             </View>
             <View style={{marginTop:6,width:300}}>
-                <Text style={{fontSize:16}}>
-                    Source:  
-                        <Text style={{fontWeight:'bold',color:'#4361ee'}}>{props.sourceName&&!props.sourceName.includes('/')?props.sourceName:"NA"}</Text>
+                <Text style={{fontSize:16,fontFamily:"Barlow-Regular"}}>
+                    Source :   
+                        <Text style={{color:'#4361ee',fontFamily:"Barlow-Bold"}}>{props.sourceName&&!props.sourceName.includes('/')?" "+props.sourceName:" NA"}</Text>
                 </Text>
             </View>
         </View>
@@ -108,13 +123,14 @@ const styles = StyleSheet.create({
         marginBottom:5
     },
     NewsTitle:{
-        fontWeight:'bold',
         fontSize:18,
-        marginTop:6
+        marginTop:6,
+        fontFamily:"Barlow-Bold"
     },
     description:{
         fontSize:16,
         fontWeight:"400",
-        marginTop:5
+        marginTop:5,
+        fontFamily:"Barlow-Regular"
     }
 })

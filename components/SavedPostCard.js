@@ -11,9 +11,11 @@ import {firebase} from '../auth/Firebase-config'
 import { authContext } from '../authContext/AuthContextProvider';
 import Svg, { Circle, Path, Rect, SvgUri } from 'react-native-svg';
 import { IconButton } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 const SavedPostCard= (props) => {
     const context=useContext(authContext);
+    const navigation=useNavigation();
     const firestore=firebase.firestore().collection('UserSavedPosts')
     async function pressHandler(){
             //dispatch(remove(props.item.title))
@@ -37,7 +39,7 @@ const SavedPostCard= (props) => {
         }}>
             <IconButton icon='cards-heart' iconColor={COLORS.blue} size={25} onPress={pressHandler}/>
         </View>
-        <Pressable onPress={()=>Linking.openURL(props.url)}>
+        <Pressable onPress={()=>navigation.navigate('NewsWebView',{uri:props.url})}>
         <>
         {props.urlToImage?
             <Image source={{uri:props.urlToImage}}
@@ -51,16 +53,16 @@ const SavedPostCard= (props) => {
             <Text style={styles.description} numberOfLines={5}>{props.description}</Text>
             <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10}}>
                 <Text style={{fontSize:16}}>
-                    By:<Text style={{fontWeight:'bold',color:'#4361ee'}}>{props.author&&!props.author.includes('/')?props.author:"NA"}</Text>
+                    By:<Text style={{fontFamily:"Barlow-Bold",color:'#4361ee'}}>{props.author&&!props.author.includes('/')?" "+ props.author:" NA"}</Text>
                 </Text>
-                <Text style={{fontWeight:'bold',color:'#4361ee',fontSize:16}}>
+                <Text style={{fontFamily:"Barlow-Bold",color:'#4361ee',fontSize:16}}>
                     {moment(props.publishedAt).format("MMM Do YY")}
                 </Text>
             </View>
             <View style={{marginTop:6}}>
-                <Text style={{fontSize:16}}>
+                <Text style={{fontSize:16,fontFamily:"Barlow-Regular"}}>
                     Source:
-                        <Text style={{fontWeight:'bold',color:'#4361ee'}}>{props.sourceName&&!props.sourceName.includes('/')?props.sourceName:"NA"}</Text>
+                        <Text style={{fontFamily:"Barlow-Bold",color:'#4361ee'}}>{props.sourceName&&!props.sourceName.includes('/')?" "+props.sourceName:" NA"}</Text>
                 </Text>
             </View>
         </View>
@@ -83,13 +85,14 @@ const styles = StyleSheet.create({
         marginBottom:5
     },
     NewsTitle:{
-        fontWeight:'bold',
+        fontFamily:"Barlow-Bold",
         fontSize:18,
         marginTop:6
     },
     description:{
         fontSize:16,
         fontWeight:"400",
-        marginTop:5
+        marginTop:5,
+        fontFamily:"Barlow-Regular"
     }
 })
