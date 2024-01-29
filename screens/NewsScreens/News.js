@@ -5,7 +5,7 @@ import { FlatList,RefreshControl,StyleSheet, Text, View } from 'react-native';
 import NewsCard from "../../components/NewsCard"
 import { Entypo } from '@expo/vector-icons'; 
 import { authContext } from '../../authContext/AuthContextProvider';
-import { Button, IconButton, Modal, Surface } from 'react-native-paper';
+import { ActivityIndicator, Button, IconButton, Modal, Surface } from 'react-native-paper';
 import LocationCardSkeleton from '../../components/LocationCardSkeleton';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -16,6 +16,7 @@ export default function Home() {
   const context=useContext(authContext)
   const[loading,setLoading]=useState(false);
   const[error,setError]=useState(false);
+  const[page,setPage]=useState(1);
   async function refreshHandler(){
     setRefresh(true);
     await news();
@@ -29,11 +30,12 @@ export default function Home() {
         params:{
           category:"technology",
           country:'us',
-          pageSize:100
+          pageSize:10,
+          page
         }
       });
       console.log(response.data.totalResults)
-      setNews(response.data.articles);
+      setNews((prevNews)=>[...prevNews,...response.data.articles]);
       setLoading(false);
     }catch(error){
       setLoading(false);
@@ -42,7 +44,7 @@ export default function Home() {
   }
   useEffect(()=>{
     news();
-  },[]);
+  },[page]);
   if(error){
     return(
       <LinearGradient style={{flex:1,justifyContent:'center',alignItems:'center'}} colors={['#D0D0E8','#071E31']}>
@@ -58,7 +60,7 @@ export default function Home() {
   }
   return(
     <LinearGradient style={{height:'100%',width:'100%'}} colors={['#D0D0E8','#071E31']}>
-      {loading?
+      {loading&&page==1?
       <View>
         <LocationCardSkeleton color={'#e2f1f8'}/>
         <LocationCardSkeleton color={'#e2f1f8'}/>
@@ -71,8 +73,9 @@ export default function Home() {
           onRefresh={refreshHandler}
           />
         }
+        onEndReachedThreshold={1}
         onEndReached={()=>{
-          
+          setPage((prevPage)=>prevPage+1)
         }}
         data={newsArticles} renderItem={({item,index})=><NewsCard item={item} url={item.url} touch={false} save={context.save} setSave={context.setSave} urlToImage={item.urlToImage} title={item.title} description={item.description} sourceName={item.source.name} publishedAt={item.publishedAt} author={item.author} 
         />}
