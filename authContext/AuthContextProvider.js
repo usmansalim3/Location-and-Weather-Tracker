@@ -32,6 +32,8 @@ export default function AuthContextProvider({children}){
     const[save,setSave]=useState(false);
     const[show,setShow]=useState(false);
     const[limit,setLimit]=useState(0);
+    const[coord,setCoord]=useState({latitude: 37.78825,
+        longitude: -122.4324})
     async function signIn(email,password){
     try{
         await firebase.auth().signInWithEmailAndPassword(email,password);
@@ -81,7 +83,9 @@ export default function AuthContextProvider({children}){
         reg,
         setReg,
         limit,
-        setLimit
+        setLimit,
+        coord,
+        setCoord
     }
     return(
         <authContext.Provider value={value}>{children}</authContext.Provider>
