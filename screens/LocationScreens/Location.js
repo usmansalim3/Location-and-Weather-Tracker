@@ -5,7 +5,7 @@ import * as locate from "expo-location";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import COLORS from '../../constants/colors';
 import {Button, Divider, FAB, IconButton, List, SegmentedButtons, Snackbar, Switch, TouchableRipple} from 'react-native-paper'
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
 import RBSheet from "react-native-raw-bottom-sheet";
 import { Entypo, Ionicons } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
@@ -26,7 +26,7 @@ function RejectionCard(){
 const Location = () => {
   const dispatch=useDispatch();
   const dataFetched=useSelector((state)=>state.weatherData);
-  const {user,limit,setLimit}=useContext(authContext)
+  const {user,limit,setLimit,coord}=useContext(authContext)
   const firestore=firebase.firestore().collection('UserLocation');
   const navigation=useNavigation();
   const [reject,setReject]=useState(false);
@@ -34,8 +34,7 @@ const Location = () => {
   const[poi,setPoi]=useState(false);
   const[inDoor,setInDoor]=useState(false)
   const[visible,setVisible]=useState(false);
-  const [coordinates,setCoordinates]=useState({latitude: 37.78825,
-    longitude: -122.4324,});
+  const [coordinates,setCoordinates]=useState(coord);
   const[value,setValue]=useState('standard');
   const rbRef=useRef();
     
@@ -70,7 +69,7 @@ const Location = () => {
       );*/
     }
     if(status==="granted"){
-      let { coords } = await locate.getCurrentPositionAsync({accuracy:locate.Accuracy.Balanced});
+      let { coords } = await locate.getCurrentPositionAsync();
       if (coords) {
         const { latitude, longitude } = coords;
         setCoordinates({latitude:latitude,longitude:longitude});
