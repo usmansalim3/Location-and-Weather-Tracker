@@ -63,7 +63,7 @@ export default function AuthContextProvider({children}){
     },[])
     async function signOut(){
          await firebase.auth().signOut();
-         AsyncStorage.removeItem("loggedIn")
+         setUser("")
          setReg(false);
     }
     value={

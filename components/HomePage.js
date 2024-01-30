@@ -1,6 +1,6 @@
 import { Animated, Platform, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useContext, useState } from 'react'
-import { NavigationContainer, useNavigation } from '@react-navigation/native'
+import { NavigationContainer, StackActions, useNavigation } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Location from '../screens/LocationScreens/Location'
 import News from '../screens/NewsScreens/News'
@@ -18,6 +18,7 @@ import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu';
 import { Icon } from '@rneui/base'
 import { LinearGradient } from 'expo-linear-gradient'
 import Forecast from '../screens/ForecastScreens/Forecast'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 
@@ -56,9 +57,10 @@ export default function HomePage(){
         </View>
         </MenuItem>
         <Divider/>
-        <MenuItem onPress={()=>{
+        <MenuItem onPress={async ()=>{
           context.signOut();
-          navigation.navigate('Login');
+          await AsyncStorage.removeItem("loggedIn");
+          navigation.navigate('splash')
           setMenu(false)
         }}>
           <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>

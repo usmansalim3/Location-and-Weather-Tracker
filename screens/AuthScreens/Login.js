@@ -55,20 +55,10 @@ const Login = () => {
   navigation.addListener('focus',()=>{
     context.setReg(false);
   })
+  
   useEffect(()=>{
-   async function isLoggedIn(){
-    const log=await AsyncStorage.getItem("loggedIn");
-    if(log){
-      // console.log(JSON.parse(log))
-      context.setUser(JSON.parse(log))
-      navigation.navigate("Home")
-      //console.log(JSON.parse(log))
-    }
-   }
-   isLoggedIn()
-  },[])
-  useEffect(()=>{
-    if(context.user && !context.reg){
+    if(context.user && !context.reg ){
+      console.log("found user")
       setTouched(false);
       navigation.navigate('Home');
     }
