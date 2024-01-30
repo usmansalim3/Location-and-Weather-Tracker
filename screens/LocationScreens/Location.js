@@ -88,7 +88,7 @@ const Location = () => {
   },[])
   async function uploadLocation(){
     try{
-      const coordinate= await locate.getCurrentPositionAsync({accuracy:locate.Accuracy.Balanced});
+      const coordinate= await locate.getLastKnownPositionAsync();
       
       const location={ userID:user.uid, latitude:coordinate.coords.latitude, longitude:coordinate.coords.longitude,
         date : firebase.firestore.Timestamp.fromDate(new Date()),aqi:dataFetched.aqi,pm2_5:dataFetched.pollutionData.pm2_5,pm10:dataFetched.pollutionData.pm10
