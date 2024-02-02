@@ -13,9 +13,9 @@ Application that tracks user location, weather and pollution data along with new
 
 ## Tech Stack
 
-**Client:** React-native, Expo
+**Client:** React-native, Expo , Expo Maps API
 
-**State Management :** ReduxToolkit, Context-api , async storage , formik(input validation)
+**State Management :** ReduxToolkit, Context-api , async storage , redux , formik(input validation)
 
 **Styling:** React-native paper, React-native elements , react-native-responsive-dimensions
 
@@ -23,16 +23,21 @@ Application that tracks user location, weather and pollution data along with new
 **Backend:** Firebase , Firestore
 
 
-## Optimizations
+## Optimizations & Techniques
 
-Memoizing components to prevent unnecessary re-renders 
+- Memoizing components to prevent unnecessary re-renders 
+- Attached Firebase Event listeners to update saved/unsaved news posts state
+- Updates location and weather info everyone 3 minutes 
 
 ## Screenshots
 
 ![wt1](https://github.com/usmansalim3/openAI/assets/112751010/d85a6df8-b4cd-4f67-b7fe-c4d8bcc697aa)
 ![wt2](https://github.com/usmansalim3/openAI/assets/112751010/adf491d4-2ebe-4f46-b5c3-d3933c252c11)
+![Screenshot 2024-02-01 231029](https://github.com/usmansalim3/Location-and-Weather-Tracker/assets/112751010/9fa3713f-f840-475d-8142-f5154aeb7497)
 
 ## Demo
+
+https://github.com/usmansalim3/Location-and-Weather-Tracker/assets/112751010/82b17be9-0dee-4d4a-8b93-16b480b2ba82
 
 https://user-images.githubusercontent.com/112751010/227322933-d57c902f-3abd-4d14-be17-96deb0b8ee12.mp4
 
