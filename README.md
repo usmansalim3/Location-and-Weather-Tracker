@@ -1,5 +1,5 @@
 # Travel Companion App
-
+# Changes here
 Application that tracks user location, weather and pollution data along with news articles with the functionality to save them on database.
 
 ## Features
